@@ -9,6 +9,32 @@ The challenge involves deploying a Three-Tier Web Application using ReactJS, Nod
 git clone https://github.com/faizan35/TWSThreeTierAppChallenge.git
 ```
 
+
+## Docker
+
+### Build Docker Images
+
+1. Frontend
+
+```bash
+cd frontend/
+sudo docker build -t faizan44/tws_three_tier_app_frontend:latest .
+```
+
+2. Backend
+
+```bash
+cd backend/
+sudo docker build -t faizan44/tws_three_tier_app_backend:latest .
+```
+
+### Push to DockerHub
+
+- `sudo docker push faizan44/tws_three_tier_app_frontend`
+- `sudo docker push faizan44/tws_three_tier_app_backend`
+
+
+
 ## Getting Started
 To get started with this project, refer to our [comprehensive guide](https://amanpathakdevops.medium.com/advanced-end-to-end-devsecops-kubernetes-three-tier-project-using-aws-eks-argocd-prometheus-fbbfdb956d1a) that walks you through IAM user setup, infrastructure provisioning, CI/CD pipeline configuration, EKS cluster creation, and more.
 
