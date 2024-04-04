@@ -7,11 +7,6 @@ apply_manifests() {
     kubectl apply -f "$dir"
 }
 
-# Main script
-echo "Starting manifest application process..."
-
-# Main script
-echo "Starting manifest application process..."
 
 # Create namespace three-tier if it doesn't exist
 if ! kubectl get namespace three-tier &> /dev/null; then
@@ -21,18 +16,22 @@ fi
 
 sleep 1
 
+# Main script
+echo "Starting manifest application process..."
+
+
 # Apply manifest files in Database directory
 apply_manifests "Database"
 
 # Wait for 5 seconds before proceeding to the next directory
-echo "Waiting for 5 seconds before applying manifests in the next directory..."
+echo "Waiting 5 seconds..."
 sleep 5
 
 # Apply manifest files in Backend directory
 apply_manifests "Backend"
 
 # Wait for 5 seconds before proceeding to the next directory
-echo "Waiting for 5 seconds before applying manifests in the next directory..."
+echo "Waiting 5 seconds..."
 sleep 5
 
 # Apply manifest files in Frontend directory
