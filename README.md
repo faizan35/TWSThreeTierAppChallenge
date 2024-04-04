@@ -48,7 +48,7 @@ sudo docker build -t faizan44/tws_three_tier_app_backend:latest .
 To get started with this project, refer to our [comprehensive guide](https://amanpathakdevops.medium.com/advanced-end-to-end-devsecops-kubernetes-three-tier-project-using-aws-eks-argocd-prometheus-fbbfdb956d1a) that walks you through IAM user setup, infrastructure provisioning, CI/CD pipeline configuration, EKS cluster creation, and more.
 
 ### Step 1: IAM Configuration
-- Create a user `eks-admin` with `AdministratorAccess`.
+- Create a user `eks-k8s` with `AdministratorAccess`.
 - Generate Security Credentials: Access Key and Secret Access Key.
 
 ### Step 2: EC2 Setup
@@ -56,11 +56,17 @@ To get started with this project, refer to our [comprehensive guide](https://ama
 - SSH into the instance from your local machine.
 
 ### Step 3: Install AWS CLI v2
+
 ``` shell
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 sudo apt install unzip
 unzip awscliv2.zip
 sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin --update
+```
+
+##### configure AWS
+
+``` shell
 aws configure
 ```
 
@@ -88,6 +94,7 @@ eksctl version
 ```
 
 ### Step 7: Setup EKS Cluster
+
 ``` shell
 eksctl create cluster --name three-tier-cluster --region us-west-2 --node-type t2.medium --nodes-min 2 --nodes-max 2
 aws eks update-kubeconfig --region us-west-2 --name three-tier-cluster
@@ -95,6 +102,7 @@ kubectl get nodes
 ```
 
 ### Step 8: Run Manifests with Script
+
 ``` shell
 kubectl create namespace workshop
 kubectl apply -f .
@@ -102,6 +110,7 @@ kubectl delete -f .
 ```
 
 ### Step 9: Install AWS Load Balancer
+
 ``` shell
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
 aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
@@ -110,6 +119,7 @@ eksctl create iamserviceaccount --cluster=three-tier-cluster --namespace=kube-sy
 ```
 
 ### Step 10: Deploy AWS Load Balancer Controller
+
 ``` shell
 sudo snap install helm --classic
 helm repo add eks https://aws.github.io/eks-charts
