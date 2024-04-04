@@ -61,6 +61,7 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 sudo apt install unzip
 unzip awscliv2.zip
 sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin --update
+/usr/local/bin/aws --version
 ```
 
 ##### configure AWS
@@ -96,6 +97,9 @@ eksctl version
 
 ``` shell
 eksctl create cluster --name three-tier-cluster --region us-west-2 --node-type t2.medium --nodes-min 2 --nodes-max 2
+```
+
+``` shell
 aws eks update-kubeconfig --region us-west-2 --name three-tier-cluster
 kubectl get nodes
 ```
@@ -104,10 +108,11 @@ kubectl get nodes
 
 ```bash
 git clone https://github.com/faizan35/TWSThreeTierAppChallenge.git
+cd TWSThreeTierAppChallenge/Kubernetes-Manifests-file
 ```
 
 ``` shell
-bash TWSThreeTierAppChallenge/Kubernetes-Manifests-file/all-three-tier-manifest.sh
+bash all-three-tier-manifest.sh
 ```
 
 ### Step 9: Install AWS Load Balancer
@@ -132,7 +137,7 @@ kubectl get deployment -n kube-system aws-load-balancer-controller
 ## Step 11: Apply Ingerss
 
 ``` shell
-kubectl apply -f TWSThreeTierAppChallenge/Kubernetes-Manifests-file/ingress.yaml
+kubectl apply -f ingress.yaml
 ```
 
 ``` shell
@@ -140,7 +145,9 @@ kubectl get ing -n three-tier
 ```
 
 ### Cleanup
+
 - To delete the EKS cluster:
+
 ``` shell
 eksctl delete cluster --name three-tier-cluster --region us-west-2
 ```
