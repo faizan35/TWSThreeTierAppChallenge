@@ -102,10 +102,12 @@ kubectl get nodes
 
 ### Step 8: Run Manifests with Script
 
+```bash
+git clone https://github.com/faizan35/TWSThreeTierAppChallenge.git
+```
+
 ``` shell
-kubectl create namespace workshop
-kubectl apply -f .
-kubectl delete -f .
+bash TWSThreeTierAppChallenge/Kubernetes-Manifests-file/all-three-tier-manifest.sh
 ```
 
 ### Step 9: Install AWS Load Balancer
@@ -125,7 +127,16 @@ helm repo add eks https://aws.github.io/eks-charts
 helm repo update eks
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=three-tier-cluster --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller
 kubectl get deployment -n kube-system aws-load-balancer-controller
-kubectl apply -f full_stack_lb.yaml
+```
+
+## Step 11: Apply Ingerss
+
+``` shell
+kubectl apply -f TWSThreeTierAppChallenge/Kubernetes-Manifests-file/ingress.yaml
+```
+
+``` shell
+kubectl get ing -n three-tier
 ```
 
 ### Cleanup
