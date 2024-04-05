@@ -21,8 +21,8 @@ spec:
       labels:
         role: frontend
     spec: 
-      imagePullSecrets:
-      - name: ecr-registry-secret
+      # imagePullSecrets:
+      # - name: ecr-registry-secret
       containers:
       - name: frontend
         image: faizan44/tws_three_tier_app_frontend
