@@ -29,12 +29,9 @@ spec:
         imagePullPolicy: Always
         env:
           - name: REACT_APP_BACKEND_URL
-            value: api
-            # value: api/api/task
-            
-            # value: http://api
-            # value: http://api:3500
-            # value: http://api:3500/api/task
-            # value: http://devpath.xyz/api/task
+            # With this containers inside the cluster can comunicate
+            # value: http://api:3500/api/tasks
+
+            value: http://<< ALB >>/api/tasks
         ports:
         - containerPort: 3000

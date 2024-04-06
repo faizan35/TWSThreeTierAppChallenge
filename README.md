@@ -4,6 +4,10 @@
 This repository hosts the `#TWSThreeTierAppChallenge` for the TWS community. 
 The challenge involves deploying a Three-Tier Web Application using ReactJS, NodeJS, and MongoDB, with deployment on AWS EKS. Participants are encouraged to deploy the application, add creative enhancements, and submit a Pull Request (PR). Merged PRs will earn exciting prizes!
 
+## Troubleshoot
+
+- Works also: `kubectl exec -it frontend-67fd64687-9nvsm -n three-tier -- curl http://api:3500/api/tasks`
+
 
 ```bash
 git clone https://github.com/faizan35/TWSThreeTierAppChallenge.git
@@ -121,8 +125,16 @@ bash all-three-tier-manifest.sh
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
 aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
 eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=three-tier-cluster --approve
+```
+
+``` shell
 eksctl create iamserviceaccount --cluster=three-tier-cluster --namespace=kube-system --name=aws-load-balancer-controller --role-name AmazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::325954021681:policy/AWSLoadBalancerControllerIAMPolicy --approve --region=us-west-2
 ```
+
+
+- If error append this in `eksctl create iamserviceaccount` Command: `--override-existing-serviceaccounts`
+
+
 
 ### Step 10: Deploy AWS Load Balancer Controller
 
